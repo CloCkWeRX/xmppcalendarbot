@@ -14,7 +14,7 @@ class CalendarBotApplication {
         $this->user = $user;
         $this->pass = $pass;
         $this->server = $server;
-
+        
         $this->actions["message"] = new MessageHandler($user, $pass);
         $this->actions["presence"] = new PresenceHandler();
         $this->actions["session_start"] = new LoginHandler();
@@ -52,7 +52,11 @@ class CalendarBotApplication {
 }
 
 function load_handler($class) {
-    @include_once dirname(__FILE__) . '/Handlers/' . $class . '.php';
+    $path = dirname(__FILE__) . '/Handlers/' . $class . '.php';
+
+    if (file_exists($path)) {
+        include_once $path;
+    }
 }
 
 spl_autoload_register('load_handler');
