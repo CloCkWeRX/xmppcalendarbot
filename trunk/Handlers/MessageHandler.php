@@ -1,7 +1,7 @@
 <?php
-require_once 'Zend/GData.php';
-require_once 'Zend/GData/ClientLogin.php';
-require_once 'Zend/GData/Calendar.php';
+require_once 'Zend/Gdata.php';
+require_once 'Zend/Gdata/ClientLogin.php';
+require_once 'Zend/Gdata/Calendar.php';
 
 class MessageHandler implements CalendarBotActionHandler {
 
