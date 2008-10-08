@@ -8,6 +8,7 @@ require_once 'PHPUnit/TextUI/TestRunner.php';
 
 require_once dirname(__FILE__) . '/Handler/HandlerTestSuite.php';
 require_once dirname(__FILE__) . '/Command/CommandTestSuite.php';
+//require_once dirname(__FILE__) . '/../xmpphp/tests/AllTests.php';
 
 class CalendarBot_Tests_AllTests {
     public static function main() {
@@ -18,6 +19,7 @@ class CalendarBot_Tests_AllTests {
         $suite = new PHPUnit_Framework_TestSuite();
         $suite->addTest(HandlerTestSuite::suite());
         $suite->addTest(CommandTestSuite::suite());
+        //$suite->addTest(AllTests::suite());
         return $suite;
     }
 }
