@@ -25,7 +25,7 @@ class WhenCommand implements MessageCommand {
         try {
             $eventFeed = $this->findEvents($this->calendar, $text);
 
-            $conn->message($data['from'], "Found you have " . count($eventFeed) . " event(s) for " . $text);
+            $conn->message($data['from'], "Found you have " . $eventFeed->count() . " event(s) for " . $text);
 
             foreach ($eventFeed as $n => $event) {
                 $span = array();

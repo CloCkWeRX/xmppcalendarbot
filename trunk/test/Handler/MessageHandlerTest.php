@@ -3,6 +3,7 @@ require_once 'PHPUnit/Framework/TestCase.php';
 
 require_once dirname(__FILE__) . '/../.../CalendarBotApplication.php';
 require_once dirname(__FILE__) . '/../.../Handlers/MessageHandler.php';
+require_once dirname(__FILE__) . '/../MockConnection.php';
 
 
 class MessageHandlerTest extends PHPUnit_Framework_TestCase {
@@ -77,20 +78,5 @@ class AnotherTestCommand implements MessageCommand {
 class ErrorTestCommand implements MessageCommand {
     public function exec($conn, $args, $data) {
         throw new Exception("I Broke");
-    }
-}
-
-class MockConnection extends XMPPHP_XMPP {
-    protected $data;
-
-    public function __construct() {
-    }
-
-    public function message($to, $body, $type = 'chat', $subject = null, $payload = null) {
-        $this->data[] = array($to, $body, $type, $subject, $payload);
-    }
-
-    public function getMessages() {
-        return $this->data;
     }
 }

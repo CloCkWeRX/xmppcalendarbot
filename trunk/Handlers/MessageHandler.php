@@ -7,21 +7,27 @@ class MessageHandler implements CalendarBotActionHandler {
 
     protected $commands;
 
-    public function __construct($user, $pass) {
-        $this->commands['quit'] = new QuitCommand();
-        $this->commands['restart'] = new RestartCommand();
-        $this->commands['help'] = new HelpCommand($this);
-        $this->commands['news'] = new NewsCommand();
-        $this->commands['break'] = new BreakCommand();
+    public function __construct($user, $pass, $commands = array()) {
+        foreach ($commands as $key => $command) {
+            $this->commands[$key] = $command;
+        }
+
+        if (empty($commands)) {
+            $this->commands['quit'] = new QuitCommand();
+            $this->commands['restart'] = new RestartCommand();
+            $this->commands['help'] = new HelpCommand($this);
+            $this->commands['news'] = new NewsCommand();
+            $this->commands['break'] = new BreakCommand();
 
 
-        //Google services FTW!
-        $client = Zend_Gdata_ClientLogin::getHttpClient($user, $pass, Zend_Gdata_Calendar::AUTH_SERVICE_NAME);
-        $calendar = new Zend_Gdata_Calendar($client);
+            //Google services FTW!
+            $client = Zend_Gdata_ClientLogin::getHttpClient($user, $pass, Zend_Gdata_Calendar::AUTH_SERVICE_NAME);
+            $calendar = new Zend_Gdata_Calendar($client);
 
-        $this->commands['agenda']   = new AgendaCommand($calendar);
-        $this->commands['reminder'] = new AddEventCommand($calendar);
-        $this->commands['when'] = new WhenCommand($calendar);
+            $this->commands['agenda']   = new AgendaCommand($calendar);
+            $this->commands['reminder'] = new AddEventCommand($calendar);
+            $this->commands['when'] = new WhenCommand($calendar);
+        }
     }
 
     public function getCommands() {
