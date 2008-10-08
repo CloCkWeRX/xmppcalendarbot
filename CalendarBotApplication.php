@@ -14,7 +14,7 @@ class CalendarBotApplication {
         $this->user = $user;
         $this->pass = $pass;
         $this->server = $server;
-        
+
         $this->actions["message"] = new MessageHandler($user, $pass);
         $this->actions["presence"] = new PresenceHandler();
         $this->actions["session_start"] = new LoginHandler();
@@ -27,7 +27,9 @@ class CalendarBotApplication {
         }
 
         $conn = new XMPPHP_XMPP($this->server, 5222, $this->user, $this->pass, 'xmpphp', 'gmail.com');
+        $conn->autoSubscribe();
         $conn->connect();
+
 
 
         while (!$conn->isDisconnected()) {
