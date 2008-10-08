@@ -16,7 +16,7 @@ class AgendaCommand implements MessageCommand {
             $start_timestamp = strtotime($day);
             $eventFeed = $this->findEvents($this->calendar, $start_timestamp);
 
-            $conn->message($data['from'], "For " . date("Y-m-d", $start_timestamp) . " you have " . count($eventFeed) . "event(s)");
+            $conn->message($data['from'], "For " . date("Y-m-d", $start_timestamp) . " you have " . $eventFeed->count() . " event(s)");
 
             foreach ($eventFeed as $n => $event) {
                 list($when) = $event->when;
